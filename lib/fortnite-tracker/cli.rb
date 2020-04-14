@@ -1,28 +1,25 @@
 class FortniteTracker::CLI
 
+    attr_reader :player
+    
     def call 
-        puts "Welcome to Fortnite Tracker!"
-        puts ""
-        puts "Track players' stats by platform and player name"
-        puts ""
-        puts ""
+        puts "Welcome to Fortnite Tracker!\n"
+        puts "Track players' stats by platform and player name\n"
         start 
     end 
 
     def start 
-        puts "Enter a platform (pc, xbox, ps4):"
+        puts "Enter a platform (pc, xbox, ps4): "
         platform = gets.downcase
-        puts "Enter a username:"
-        player = gets.downcase
-        find_player(APIManager.get_player(platform, player).id)
+        puts "Enter a username: "
+        handle = gets.downcase
+        APIManager.get_player(platform, handle)
+        @player = Players.all.find{|player| player.name.downcase == handle.downcase}
+        track_player
     end 
 
-    def find_player(id)
-        track_player(Players.all.find{|player| player.id == id})
-
-    def track_player(player)
-        puts "Options:"
-        puts "" 
+    def menu 
+        puts "Menu:\n"
         puts "Type 'all' for all stats"
         puts "Type 'time played' for total time played"
         puts "Type 'top fives' for total games with Top 5 placement"
@@ -31,49 +28,43 @@ class FortniteTracker::CLI
         puts "Type 'kills' for total kills"
         puts "Type 'kdr' for kill-death ratio"
         puts "Type 'history' for match history"
-        puts "Type 'exit' to exit"
+        puts "Type 'player' to get a different player"
+        puts "\nType 'exit' to exit"
+    end
+
+    def track_player
+        menu
         input = nil 
-        while input != "exit"
+        while input != "exit" || input != "player"
             input = gets.downcase
             case input
                 when "all"
-                    puts ""
-                    puts "All Stats for #{player.name}"
-                    puts""
+                    puts "\nAll Stats for #{player.name}\n"
                     player.all_stats
-                    puts""
                 when "time played"
-                    puts ""
-                    puts "#{player.name} has played for #{player.time_played}"
-                    puts ""
+                    puts "\n#{player.name} has played for #{player.time_played}\n"
                 when "top fives"
-                    puts ""
-                    puts "#{player.name} has placed top 5 in #{player.top_fives} games"
-                    puts ""
+                    puts "\n#{player.name} has placed top 5 in #{player.top_fives} games\n"
                 when "wins"
-                    puts ""
-                    puts "#{player.name} has won #{player.wins} games"
-                    puts ""
+                    puts "\n#{player.name} has won #{player.wins} games\n"
                 when "percentage"
-                    puts ""
-                    puts "#{player.name} has a win percentage of #{player.win_percentage}"
-                    puts ""
+                    puts "\n#{player.name} has a win percentage of #{player.win_percentage}\n"
                 when "kills"
-                    puts ""
-                    puts "#{player.name} has #{player.kills} total kills"
-                    puts ""
+                    puts "\n#{player.name} has #{player.kills} total kills\n"
                 when "kdr"
-                    puts ""
-                    puts "#{player.name} has a KDR of #{player.kdr}"
-                    puts ""
+                    puts "\n#{player.name} has a KDR of #{player.kdr}\n"
                 when "history"
-                    puts "#{player.match_history}"
+                    puts "\n#{player.match_history}\n"
+                when "player"
+                    start
                 when "exit"
-                
+                    exit
                 else 
                     puts "Please enter a valid input:"
                 end
         end 
     end 
+
+    def 
 
 end

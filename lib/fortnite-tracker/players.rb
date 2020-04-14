@@ -11,7 +11,7 @@ class FortniteTracker::Players
     # create and save instance
     def self.create(response)
         new(response).save
-        @@all.last.id
+        @@all.last
     end 
 
     # find player object by ID
@@ -23,7 +23,7 @@ class FortniteTracker::Players
     # if the player exists, return the player. If not, create a new player object
     def self.find_or_create_by_id(response)
         if self.find_by_id(response)
-            self.find_by_id.id
+            self.find_by_id
         else 
             self.create(response)
         end
@@ -87,23 +87,17 @@ class FortniteTracker::Players
         else
             collection = 1
             @stats["recentMatches"].each do |matches|
-                puts ""
                 puts "Collection #{collection}:"
                 puts "-----------------------------------"
-                puts "Matches Played: #{matches["matches"]}"
-                puts ""
-                puts "Date Collected: #{matches["dateCollected"].split("T")[0]}"
-                puts ""
-                puts "Playlist: #{matches["playlist"].capitalize}"
-                puts ""
+                puts "Matches Played: #{matches["matches"]}\n"
+                puts "Date Collected: #{matches["dateCollected"].split("T")[0]}\n"
+                puts "Playlist: #{matches["playlist"].capitalize}\n"
                 if matches["top1"] > 0 
-                    puts "Result: #{matches["top1"]} win(s)"
+                    puts "Result: #{matches["top1"]} win(s)\n"
                 else 
-                    puts "Result: No matches won"
+                    puts "Result: No matches won\n"
                 end
-                puts ""
-                puts "Kills: #{matches["kills"]}"
-                puts""
+                puts "Kills: #{matches["kills"]}\n"
                 puts "Outlived #{matches["playersOutlived"]} players in #{matches["matches"]} matches"
                 puts "-----------------------------------"
                 collection += 1
