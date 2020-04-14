@@ -11,6 +11,7 @@ class FortniteTracker::Players
     # create and save instance
     def self.create(response)
         new(response).save
+        @@all.last.id
     end 
 
     # find player object by ID
@@ -22,7 +23,7 @@ class FortniteTracker::Players
     # if the player exists, return the player. If not, create a new player object
     def self.find_or_create_by_id(response)
         if self.find_by_id(response)
-            self.find_by_id(response)
+            self.find_by_id.id
         else 
             self.create(response)
         end
