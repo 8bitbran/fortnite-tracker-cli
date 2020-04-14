@@ -1,0 +1,3 @@
+class FortniteTracker::CLI
+
+end
