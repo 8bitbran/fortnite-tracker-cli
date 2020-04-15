@@ -101,6 +101,7 @@ class FortniteTracker::Players
                 puts "Kills: #{matches["kills"]}\n"
                 puts "Outlived #{matches["playersOutlived"]} players in #{matches["matches"]} matches"
                 puts "-----------------------------------"
+                puts "\n"
                 collection += 1
             end 
         end
