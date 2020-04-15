@@ -5,6 +5,6 @@ class FortniteTracker::APIManager
     def self.get_player(platform, player)
         headers = {"TRN-Api-Key" => "5b6dbd29-9779-4709-85cf-ce5174b36f90"}
         response = HTTParty.get("#{BASE_URL}#{platform}/#{player}", headers: headers)
-        Players.find_or_create_by_id(response)
+        FortniteTracker::Players.create(response)
     end
 end 
