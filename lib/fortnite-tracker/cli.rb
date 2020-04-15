@@ -53,7 +53,7 @@ class FortniteTracker::CLI
             input = gets.chomp.downcase
             case input
                 when "all"
-                    puts "\nAll Stats for #{player.name.color(:red)}\n\n"
+                    puts "\n#{"All Stats".color(:yellow)} for #{player.name.color(:red)}\n\n"
                     player.all_stats
                     puts "\n\n"
                     puts "Enter another option or type #{"'menu'".color(:red)} for menu: \n\n"
