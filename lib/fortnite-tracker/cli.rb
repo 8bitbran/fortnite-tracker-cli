@@ -3,24 +3,23 @@ class FortniteTracker::CLI
     attr_accessor :player
     
     def call 
-        puts "Welcome to Fortnite Tracker!\n"
-        puts "Track players' stats by platform and player name\n"
+        puts "Welcome to Fortnite Tracker!\n\n"
+        puts "Track players' stats by platform and player name\n\n"
         start 
     end 
 
     def start 
         puts "Enter a platform (pc, xbox, ps4): "
         platform = gets.chomp.downcase
-        puts "Enter a username: "
+        puts "\nEnter a username: "
         handle = gets.chomp.downcase
-        binding.pry
-        FortniteTracker::Player.find_or_create_by_name(platform, handle)
+        FortniteTracker::Players.find_or_create_by_name(platform, handle)
         @player = FortniteTracker::Players.all.find{|player| player.name.downcase == handle.downcase}
         track_player
     end 
 
     def menu 
-        puts "Menu:\n"
+        puts "Menu:\n\n"
         puts "Type 'all' for all stats"
         puts "Type 'time played' for total time played"
         puts "Type 'top fives' for total games with Top 5 placement"
@@ -30,45 +29,52 @@ class FortniteTracker::CLI
         puts "Type 'kdr' for kill-death ratio"
         puts "Type 'history' for match history"
         puts "Type 'player' to get a different player"
-        puts "\nType 'exit' to exit"
+        puts "\n\nType 'exit' to exit\n\n"
     end
 
     def track_player
         menu
         input = nil 
-        while input != "exit" || input != "player"
+        while input != "exit" || input != "player" || input != "start"
             input = gets.chomp.downcase
             case input
                 when "all"
-                    puts "\nAll Stats for #{player.name}\n"
+                    puts "\n\nAll Stats for #{player.name}\n\n"
                     player.all_stats
-                    puts "\nEnter another option or type 'exit' to exit: "
+                    puts "\n\n"
+                    puts "Enter another option or type 'menu' for menu: \n\n"
                 when "time played"
-                    puts "\n#{player.name} has played for #{player.time_played}\n"
-                    puts "Enter another option or type 'exit' to exit: "
+                    puts "\n\n#{player.name} has played #{player.time_played}\n\n"
+                    puts "Enter another option or type 'menu' for menu: \n\n"
                 when "top fives"
-                    puts "\n#{player.name} has placed top 5 in #{player.top_fives} games\n"
-                    puts "Enter another option or type 'exit' to exit: "
+                    puts "\n\n#{player.name} has placed top 5 in #{player.top_fives} games\n\n"
+                    puts "Enter another option or type 'menu' for menu: \n\n"
                 when "wins"
-                    puts "\n#{player.name} has won #{player.wins} games\n"
-                    puts "Enter another option or type 'exit' to exit: "
+                    puts "\n\n#{player.name} has won #{player.wins} games\n\n"
+                    puts "Enter another option or type 'menu' for menu: \n\n"
                 when "percentage"
-                    puts "\n#{player.name} has a win percentage of #{player.win_percentage}\n"
-                    puts "Enter another option or type 'exit' to exit: "
+                    puts "\n\n#{player.name} has a win percentage of #{player.win_percentage}\n\n"
+                    puts "Enter another option or type 'menu' for menu: \n\n"
                 when "kills"
-                    puts "\n#{player.name} has #{player.kills} total kills\n"
-                    puts "Enter another option or type 'exit' to exit: "
+                    puts "\n\n#{player.name} has #{player.kills} total kills\n\n"
+                    puts "Enter another option or type 'menu' for menu: \n\n"
                 when "kdr"
-                    puts "\n#{player.name} has a KDR of #{player.kdr}\n"
+                    puts "\n\n#{player.name} has a KDR of #{player.kdr}\n\n"
+                    puts "Enter another option or type 'menu' for menu: \n\n"
                 when "history"
-                    puts "\n#{player.match_history}\n"
-                    puts "Enter another option or 'exit' to exit: "
+                    puts "\n"
+                    puts "#{player.match_history}"
+                    puts "\n"
+                    puts "Enter another option or 'menu' for menu: \n\n"
+                when "menu"
+                    menu 
                 when "player"
+                    puts "\n"
                     start
                 when "exit"
                     exit
                 else 
-                    puts "Please enter a valid input:"
+                    puts "\nPlease enter a valid input: \n\n"
                 end
         end 
     end 
