@@ -14,18 +14,18 @@ class FortniteTracker::Players
         @@all.last
     end 
 
-    # find player object by ID
-    def self.find_by_id(response)
-        @@all.find{|player| player.id == response["accountId"]}
+    # find player object by name
+    def self.find_by_name(name)
+        @@all.find{|player| player.name == name}
     end 
 
-    # uses the find_by_id method to check if a player already exists. 
+    # uses the find_by_name method to check if a player already exists. 
     # if the player exists, return the player. If not, create a new player object
-    def self.find_or_create_by_id(response)
-        if self.find_by_id(response)
-            self.find_by_id
+    def self.find_or_create_by_name(platform, name)
+        if self.find_by_name(name)
+            self.find_by_name
         else 
-            self.create(response)
+            FortniteTracker::APIManager.get_player(platform, name)
         end
     end 
 
@@ -52,7 +52,8 @@ class FortniteTracker::Players
     # targets the minutesPlayed hash and converts the minutes to hours and minutes
     def time_played
         minutes = @stats["stats"]["p2"]["minutesPlayed"]["valueInt"] + @stats["stats"]["p10"]["minutesPlayed"]["valueInt"] + @stats["stats"]["p9"]["minutesPlayed"]["valueInt"]
-        puts "#{minutes / 60}hrs #{minutes % 60}mins"
+        time = "#{minutes / 60}hrs #{minutes % 60}mins"
+        time
     end 
 
     # targets the lifeTimeStats hash and the element holding the top 5's value
@@ -111,5 +112,3 @@ class FortniteTracker::Players
     end 
 
 end 
-
-binding.pry
