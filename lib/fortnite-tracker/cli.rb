@@ -14,7 +14,7 @@ class FortniteTracker::CLI
         puts "Enter a username: "
         handle = gets.chomp.downcase
         binding.pry
-        FortniteTracker::APIManager.get_player(platform, handle)
+        FortniteTracker::Player.find_or_create_by_name(platform, handle)
         @player = FortniteTracker::Players.all.find{|player| player.name.downcase == handle.downcase}
         track_player
     end 
