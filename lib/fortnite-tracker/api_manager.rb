@@ -11,6 +11,5 @@ class FortniteTracker::APIManager
             puts "\nThe username is invalid, please re-enter your info\n\n"
             FortniteTracker::CLI.new.start
         end
-        puts "created player"
     end
 end 
