@@ -5,6 +5,11 @@ class FortniteTracker::APIManager
     def self.get_player(platform, player)
         headers = {"TRN-Api-Key" => "5b6dbd29-9779-4709-85cf-ce5174b36f90"}
         response = HTTParty.get("#{BASE_URL}#{platform}/#{player}", headers: headers)
-        FortniteTracker::Players.create(response)
+        if !response.include?("\n")
+            FortniteTracker::Players.create(response)
+        else 
+            puts "\nThe username is invalid, please re-enter your info\n\n"
+            FortniteTracker::CLI.new.start
+        end
     end
 end 
