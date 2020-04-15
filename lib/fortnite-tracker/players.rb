@@ -23,7 +23,7 @@ class FortniteTracker::Players
     # if the player exists, return the player. If not, create a new player object
     def self.find_or_create_by_name(platform, name)
         if self.find_by_name(name)
-            self.find_by_name
+            self.find_by_name(name)
         else 
             FortniteTracker::APIManager.get_player(platform, name)
         end
