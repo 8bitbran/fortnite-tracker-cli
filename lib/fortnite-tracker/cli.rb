@@ -1,6 +1,6 @@
 class FortniteTracker::CLI
 
-    attr_reader :player
+    attr_accessor :player
     
     def call 
         puts "Welcome to Fortnite Tracker!\n"
@@ -10,11 +10,12 @@ class FortniteTracker::CLI
 
     def start 
         puts "Enter a platform (pc, xbox, ps4): "
-        platform = gets.downcase
+        platform = gets.chomp.downcase
         puts "Enter a username: "
-        handle = gets.downcase
-        APIManager.get_player(platform, handle)
-        @player = Players.all.find{|player| player.name.downcase == handle.downcase}
+        handle = gets.chomp.downcase
+        binding.pry
+        FortniteTracker::APIManager.get_player(platform, handle)
+        @player = FortniteTracker::Players.all.find{|player| player.name.downcase == handle.downcase}
         track_player
     end 
 
@@ -36,27 +37,27 @@ class FortniteTracker::CLI
         menu
         input = nil 
         while input != "exit" || input != "player"
-            input = gets.downcase
+            input = gets.chomp.downcase
             case input
                 when "all"
                     puts "\nAll Stats for #{player.name}\n"
                     player.all_stats
-                    puts "\nEnter another option or 'exit' to exit: "
+                    puts "\nEnter another option or type 'exit' to exit: "
                 when "time played"
                     puts "\n#{player.name} has played for #{player.time_played}\n"
-                    puts "Enter another option or 'exit' to exit: "
+                    puts "Enter another option or type 'exit' to exit: "
                 when "top fives"
                     puts "\n#{player.name} has placed top 5 in #{player.top_fives} games\n"
-                    puts "Enter another option or 'exit' to exit: "
+                    puts "Enter another option or type 'exit' to exit: "
                 when "wins"
                     puts "\n#{player.name} has won #{player.wins} games\n"
-                    puts "Enter another option or 'exit' to exit: "
+                    puts "Enter another option or type 'exit' to exit: "
                 when "percentage"
                     puts "\n#{player.name} has a win percentage of #{player.win_percentage}\n"
-                    puts "Enter another option or 'exit' to exit: "
+                    puts "Enter another option or type 'exit' to exit: "
                 when "kills"
                     puts "\n#{player.name} has #{player.kills} total kills\n"
-                    puts "Enter another option or 'exit' to exit: "
+                    puts "Enter another option or type 'exit' to exit: "
                 when "kdr"
                     puts "\n#{player.name} has a KDR of #{player.kdr}\n"
                 when "history"
@@ -71,5 +72,5 @@ class FortniteTracker::CLI
                 end
         end 
     end 
-    
+
 end
