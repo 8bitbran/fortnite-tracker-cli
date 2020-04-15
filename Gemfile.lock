@@ -1,6 +1,10 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    asciiart (0.0.8)
+      rainbow (= 2.0.0)
+      rmagick
+    colorize (0.8.1)
     httparty (0.18.0)
       mime-types (~> 3.0)
       multi_xml (>= 0.5.2)
@@ -8,14 +12,17 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2019.1009)
     multi_xml (0.6.0)
-    uri (0.10.0)
+    rainbow (2.0.0)
+    rmagick (4.1.2)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  asciiart
+  colorize
   httparty
-  uri
+  rmagick
 
 BUNDLED WITH
    2.1.4
