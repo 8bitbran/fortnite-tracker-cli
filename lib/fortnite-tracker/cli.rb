@@ -8,17 +8,26 @@ class FortniteTracker::CLI
         start 
     end 
 
-    def start 
+    def start
+        platform, handle = platform_name, player_name
+        FortniteTracker::Players.find_or_create_by_name(platform, handle)
+        @player = FortniteTracker::Players.all.find{|player| player.name.downcase == handle.downcase}
+        track_player
+    end 
+
+    def platform_name 
         platform = nil
         until platform == "pc" || platform == "xbox" || platform == "ps4" 
             puts "Please enter a platform (pc, xbox, ps4): "
             platform = gets.chomp.downcase
         end
+        platform
+    end
+    
+    def player_name
         puts "\nEnter a username: "
         handle = gets.chomp.downcase
-        FortniteTracker::Players.find_or_create_by_name(platform, handle)
-        @player = FortniteTracker::Players.all.find{|player| player.name.downcase == handle.downcase}
-        track_player
+        handle
     end 
 
     def menu 
@@ -81,5 +90,4 @@ class FortniteTracker::CLI
                 end
         end 
     end 
-
 end
