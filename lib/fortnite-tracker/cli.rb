@@ -13,7 +13,8 @@ class FortniteTracker::CLI
     def start
         platform, handle = platform_name, player_name
         FortniteTracker::Players.find_or_create_by_name(platform, handle)
-        @player = FortniteTracker::Players.all.find{|player| player.name.downcase == handle.downcase}
+        @player = FortniteTracker::Players.all.find{|player| player.name == handle.downcase}
+        binding.pry
         track_player
     end 
 
@@ -53,31 +54,31 @@ class FortniteTracker::CLI
             input = gets.chomp.downcase
             case input
                 when "all"
-                    puts "\n#{"All Stats".color(:yellow)} for #{player.name.color(:red)}\n\n"
+                    puts "\n#{"All Stats".color(:yellow)} for #{@player.name.color(:red)}\n\n"
                     player.all_stats
                     puts "\n\n"
                     puts "Enter another option or type #{"'menu'".color(:red)} for menu: \n\n"
                 when "time played"
-                    puts "\n#{player.name.color(:red)} has played #{player.time_played.color(:yellow)}\n\n"
+                    puts "\n#{@player.name.color(:red)} has played #{@player.time_played.color(:yellow)}\n\n"
                     puts "Enter another option or type #{"'menu'".color(:red)}  for menu: \n\n"
                 when "top fives"
-                    puts "\n#{player.name.color(:red)} has placed top 5 in #{player.top_fives.color(:yellow)} games\n\n"
+                    puts "\n#{@player.name.color(:red)} has placed top 5 in #{@player.top_fives.color(:yellow)} games\n\n"
                     puts "Enter another option or type #{"'menu'".color(:red)}  for menu: \n\n"
                 when "wins"
-                    puts "\n#{player.name.color(:red)} has won #{player.wins.color(:yellow)} games\n\n"
+                    puts "\n#{@player.name.color(:red)} has won #{@player.wins.color(:yellow)} games\n\n"
                     puts "Enter another option or type #{"'menu'".color(:red)}  for menu: \n\n"
                 when "percentage"
-                    puts "\n#{player.name.color(:red)} has a win percentage of #{player.win_percentage.color(:yellow)}\n\n"
+                    puts "\n#{@player.name.color(:red)} has a win percentage of #{@player.win_percentage.color(:yellow)}\n\n"
                     puts "Enter another option or type #{"'menu'".color(:red)}  for menu: \n\n"
                 when "kills"
-                    puts "\n#{player.name.color(:red)} has #{player.kills.color(:yellow)} total kills\n\n"
+                    puts "\n#{@player.name.color(:red)} has #{@player.kills.color(:yellow)} total kills\n\n"
                     puts "Enter another option or type #{"'menu'".color(:red)}  for menu: \n\n"
                 when "kdr"
-                    puts "\n#{player.name.color(:red)} has a KDR of #{player.kdr.color(:yellow)}\n\n"
+                    puts "\n#{@player.name.color(:red)} has a KDR of #{@player.kdr.color(:yellow)}\n\n"
                     puts "Enter another option or type #{"'menu'".color(:red)}  for menu: \n\n"
                 when "history"
-                    puts "\n#{"Match History".color(:yellow)} for #{player.name.color(:red)}\n\n"
-                    puts "#{player.match_history}"
+                    puts "\n#{"Match History".color(:yellow)} for #{@player.name.color(:red)}\n\n"
+                    puts "#{@player.match_history}"
                     puts "\n"
                     puts "Enter another option or #{"'menu'".color(:red)}  for menu: \n\n"
                 when "menu"
