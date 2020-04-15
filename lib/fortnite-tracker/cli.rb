@@ -9,8 +9,11 @@ class FortniteTracker::CLI
     end 
 
     def start 
-        puts "Enter a platform (pc, xbox, ps4): "
-        platform = gets.chomp.downcase
+        platform = nil
+        until platform == "pc" || platform == "xbox" || platform == "ps4" 
+            puts "Please enter a platform (pc, xbox, ps4): "
+            platform = gets.chomp.downcase
+        end
         puts "\nEnter a username: "
         handle = gets.chomp.downcase
         FortniteTracker::Players.find_or_create_by_name(platform, handle)
@@ -19,7 +22,7 @@ class FortniteTracker::CLI
     end 
 
     def menu 
-        puts "Menu:\n\n"
+        puts "\nMenu Options:\n\n"
         puts "Type 'all' for all stats"
         puts "Type 'time played' for total time played"
         puts "Type 'top fives' for total games with Top 5 placement"
@@ -29,7 +32,7 @@ class FortniteTracker::CLI
         puts "Type 'kdr' for kill-death ratio"
         puts "Type 'history' for match history"
         puts "Type 'player' to get a different player"
-        puts "\n\nType 'exit' to exit\n\n"
+        puts "\nType 'exit' to exit\n\n"
     end
 
     def track_player
@@ -39,27 +42,27 @@ class FortniteTracker::CLI
             input = gets.chomp.downcase
             case input
                 when "all"
-                    puts "\n\nAll Stats for #{player.name}\n\n"
+                    puts "\nAll Stats for #{player.name}\n\n"
                     player.all_stats
                     puts "\n\n"
                     puts "Enter another option or type 'menu' for menu: \n\n"
                 when "time played"
-                    puts "\n\n#{player.name} has played #{player.time_played}\n\n"
+                    puts "\n#{player.name} has played #{player.time_played}\n\n"
                     puts "Enter another option or type 'menu' for menu: \n\n"
                 when "top fives"
-                    puts "\n\n#{player.name} has placed top 5 in #{player.top_fives} games\n\n"
+                    puts "\n#{player.name} has placed top 5 in #{player.top_fives} games\n\n"
                     puts "Enter another option or type 'menu' for menu: \n\n"
                 when "wins"
-                    puts "\n\n#{player.name} has won #{player.wins} games\n\n"
+                    puts "\n#{player.name} has won #{player.wins} games\n\n"
                     puts "Enter another option or type 'menu' for menu: \n\n"
                 when "percentage"
-                    puts "\n\n#{player.name} has a win percentage of #{player.win_percentage}\n\n"
+                    puts "\n#{player.name} has a win percentage of #{player.win_percentage}\n\n"
                     puts "Enter another option or type 'menu' for menu: \n\n"
                 when "kills"
-                    puts "\n\n#{player.name} has #{player.kills} total kills\n\n"
+                    puts "\n#{player.name} has #{player.kills} total kills\n\n"
                     puts "Enter another option or type 'menu' for menu: \n\n"
                 when "kdr"
-                    puts "\n\n#{player.name} has a KDR of #{player.kdr}\n\n"
+                    puts "\n#{player.name} has a KDR of #{player.kdr}\n\n"
                     puts "Enter another option or type 'menu' for menu: \n\n"
                 when "history"
                     puts "\n"
