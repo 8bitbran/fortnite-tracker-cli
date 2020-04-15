@@ -86,7 +86,7 @@ class FortniteTracker::Players
         else
             collection = 1
             @stats["recentMatches"].each do |matches|
-                puts "Collection #{collection}:"
+                puts "Collection #{collection}:".color(:yellow)
                 puts "-----------------------------------"
                 puts "Matches Played: #{matches["matches"]}\n"
                 puts "Date Collected: #{matches["dateCollected"].split("T")[0]}\n"
