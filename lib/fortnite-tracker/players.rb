@@ -16,15 +16,13 @@ class FortniteTracker::Players
 
     # find player object by name
     def self.find_by_name(name)
-        @@all.find{|player| player.name == name}
+        @@all.find{|player| player.name.downcase == name}
     end 
 
     # uses the find_by_name method to check if a player already exists. 
     # if the player exists, return the player. If not, create a new player object
     def self.find_or_create_by_name(platform, name)
-        if self.find_by_name(name)
-            self.find_by_name(name)
-        else 
+        if !self.find_by_name(name)
             FortniteTracker::APIManager.get_player(platform, name)
         end
     end 
