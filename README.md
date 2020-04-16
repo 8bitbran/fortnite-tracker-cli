@@ -8,7 +8,11 @@ You can install by cloning this repository to your local machine.
 
 ## Usage
 
-Execute `/bin/fortnite_tracker` after cloning the repository
+Execute `bin/fortnite_tracker` after cloning the repository.
+
+## Contributing 
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/8bitbran/fortnite-tracker-cli
 
 ## License
 
