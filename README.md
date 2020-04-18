@@ -4,8 +4,8 @@ FortniteTracker uses the HTTParty gem to make requests to the [Fortnite Tracker 
 
 ## Installation
 
-Run ```brew install imagemagick``` in your terminal.
-Install application by cloning this repository to your local machine.
+1. Run ```brew install imagemagick``` in your terminal.
+2. Install application by cloning this repository to your local machine.
 
 ## Usage
 
