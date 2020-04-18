@@ -79,12 +79,8 @@ class FortniteTracker::Players
         @stats["lifeTimeStats"][11]["value"]
     end 
 
-    # checks if player has recent match history and iterates through the matches to puts out the information
-    def match_history
-        if @stats["recentMatches"].empty?
-            puts "There are no recent matches available."
-        else
-            collection = 1
+    def collections 
+        collection = 1
             @stats["recentMatches"].each do |matches|
                 puts "Collection #{collection}:".color(:yellow)
                 puts "-----------------------------------"
@@ -102,7 +98,16 @@ class FortniteTracker::Players
                 puts "-----------------------------------"
                 puts "\n"
                 collection += 1
-            end 
+            end
+            puts "#{"End".color(:red)} of #{"Match History".color(:yellow)}"
+    end 
+
+    # checks if player has recent match history and iterates through the matches to puts out the information
+    def match_history
+        if @stats["recentMatches"].empty?
+            puts "There are no recent matches available."
+        else
+            collections
         end
     end
 

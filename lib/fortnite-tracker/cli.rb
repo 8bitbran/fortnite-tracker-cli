@@ -14,7 +14,6 @@ class FortniteTracker::CLI
         platform, handle = platform_name, player_name
         FortniteTracker::Players.find_or_create_by_name(platform, handle)
         @player = FortniteTracker::Players.all.find{|player| player.name.downcase == handle.downcase}
-        binding.pry
         track_player
     end 
 
